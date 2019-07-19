@@ -20,11 +20,11 @@
     <section class="outer-container">
       <section class="input-container">
 
-        <label for="searchfield">Write postcode:</label>
+        <label for="searchField">Write postcode:</label>
         <input type="text" name="searchfield"
           class="search-field"
-          id="searchfield"
-          placeholder="Enter your Postcode"
+          id="searchField"
+          placeholder="Enter your postcode"
           required
         />
 
@@ -51,16 +51,17 @@
             <option value="2017">2017</option>
           </select>
 
-        <button class="search-button" id="searchbutton">Search</button>
+        <button class="search-button" id="searchButton">Search</button>
       </section>
 
-    <section class="result">
-      <article id="container" class="container">
+    <section class="result-container">
+      <article>
         <h1>Your Results</h1>
         <p class="numberOfCrimes">Number of crimes:</p>
-        <ul class="categoriesOfCrimes">Categories of crimes in your area:</ul>
+        <p class="text">Categories of crimes in your area:</p>
+        <ul class="categoriesOfCrimes"></ul>
       </article>
-
+      </section>
     </section>
 
     <script src="index.js"></script>

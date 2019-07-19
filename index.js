@@ -1,11 +1,3 @@
-var selectedMonth = "";
-
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function dropDown() {
-  document.getElementById("dropdown").classList.toggle("show");
-}
-
 //Remove spaces from postcode
 function removeSpaces(postcode) {
   return postcode.replace(/\s/g, "");
@@ -39,23 +31,21 @@ function categoriesIterator(policeObj) {
   return objByCat;
 }
 
-let results = document.querySelector(".result");
-
-let search = document.querySelector("#searchbutton");
+let search = document.querySelector("#searchButton");
 search.addEventListener("click", query);
 
 function query() {
   let e = document.querySelector("ul");
   e.innerHTML = "";
 
-  let postcode = document.querySelector("#searchfield").value;
+  let postcode = document.querySelector("#searchField").value;
   //API call to validate postcode
   let valid = new XMLHttpRequest();
   let urlValid = `https://api.postcodes.io/postcodes/${postcode}/validate`;
 
   valid.onreadystatechange = function() {
     if (valid.readyState == 4 && valid.status == 200) {
-      var response = JSON.parse(valid.responseText);
+      let response = JSON.parse(valid.responseText);
       if (response.result) {
         location(postcode);
       } else {
@@ -63,7 +53,7 @@ function query() {
         function first() {
           setTimeout(function() {
             alert("Please, enter a valid postcode, e.g. SW1A 1AA");
-          }, 500);
+          }, 1);
         }
         function second() {
           let numCrimes = document.querySelector(".numberOfCrimes");
@@ -85,9 +75,9 @@ function query() {
 
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        var response = JSON.parse(xhr.responseText);
-        var lat = response.result.latitude;
-        var long = response.result.longitude;
+        let response = JSON.parse(xhr.responseText);
+        let lat = response.result.latitude;
+        let long = response.result.longitude;
 
         let month = document.querySelector("#month").value;
         let year = document.querySelector("#year").value;
@@ -101,17 +91,18 @@ function query() {
 // / Police API
 
 let policeAPI = function(la, lo, month, year) {
-  var xhr = new XMLHttpRequest();
-  var URL = `https://data.police.uk/api/crimes-at-location?date=${year}-${month}&lat=${la}&lng=${lo}`;
+  let xhr = new XMLHttpRequest();
+  let URL = `https://data.police.uk/api/crimes-at-location?date=${year}-${month}&lat=${la}&lng=${lo}`;
 
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      var policeObj = JSON.parse(xhr.responseText);
+      let policeObj = JSON.parse(xhr.responseText);
 
       let totalCrimes = policeObj.length;
       let crimeNum = document.querySelector(".numberOfCrimes");
       crimeNum.textContent = `Number of crimes: ${totalCrimes}`;
 
+      //POPULATE WITH CATEGORIES WITH COUNT OF CRIMES
       let categories = Object.keys(categoriesIterator(policeObj));
       let numbers = Object.values(categoriesIterator(policeObj));
 
@@ -119,11 +110,9 @@ let policeAPI = function(la, lo, month, year) {
         let newLine = document.createElement("li");
         let parentCrimes = document.querySelector(".categoriesOfCrimes");
         parentCrimes.appendChild(newLine);
-        newLine.setAttribute("class", "crimes");
 
-        newLine.textContent = `${categories[i]}: ${numbers[i]}`;
+        newLine.textContent = `${categories[i]}: ${numbers[i]}`;        
       }
-      //POPULATE WITH CATEGORIES WITH COUNT OF CRIMES
     }
   };
   xhr.open("GET", URL, true);

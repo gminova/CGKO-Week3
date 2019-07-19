@@ -8,6 +8,10 @@ body {
   font-size: 1.1rem;
 }
 
+.title {
+  text-align: center;
+}
+
 .search-button,
 .dropdown {
   background-color: #272727;
@@ -16,24 +20,11 @@ body {
   cursor: pointer;
   border: 1px solid black;
   font-size: 1em;
-}
-.search-button {
-  background-color: white;
-  background-color: #3E8500;
-  color: white;
-  padding: 16px;
-  cursor: pointer;
-  border: 1px solid black; 
   margin-top: 10px; 
 }
 
 .search-field {
   font-size: 1em;
-}
-
-.outer-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .input-container {
@@ -42,9 +33,9 @@ body {
 }
 
 .result-container {
-  margin-top: 5%;
-  display: flex;
-  background-color: #f7f7f7;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(211, 211, 211, 0.315);
 }
 
 label {
@@ -53,6 +44,6 @@ label {
 
 @media only screen and (min-width: 900px) {
   body {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 }
