@@ -21,7 +21,7 @@ They have an idea about where they want to live but would like to know local cri
 A young family expecting a baby is looking for a place in a safe area, and would like to know about the number of recent crimes by category.
 
 ## Screenshots
-![](https://i.imgur.com/cUqREhX.png)
+![mobile version](https://github.com/gminova/crime-watcher/blob/master/mobile.png?raw=true)
 
 ## "Code of conduct" - (How we agreed to work together in this team)
 
