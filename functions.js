@@ -1,5 +1,3 @@
-//These are for testing purpose only and are not used in the final product.
-
 const functions = {
   test: function() {
     return "Tape is working! Hooray!";

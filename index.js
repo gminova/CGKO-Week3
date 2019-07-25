@@ -79,9 +79,17 @@ function query() {
         let lat = response.result.latitude;
         let long = response.result.longitude;
 
+        //check date is not in the future or current month
+        let today = new Date();
+        let currentMonth = today.getMonth() + 1;
+
         let month = document.querySelector("#month").value;
+        if(currentMonth <= month) {
+          alert("Please, select a date in the past");
+        } else {
         let year = document.querySelector("#year").value;
         policeAPI(lat, long, month, year);
+        }
       }
     };
     xhr.open("GET", urlLocation, true);
