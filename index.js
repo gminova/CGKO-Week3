@@ -34,6 +34,8 @@ function categoriesIterator(policeObj) {
 let search = document.querySelector("#searchButton");
 search.addEventListener("click", query);
 
+let numCrimes = document.querySelector(".numberOfCrimes");
+
 function query() {
   let e = document.querySelector("ul");
   e.innerHTML = "";
@@ -49,19 +51,8 @@ function query() {
       if (response.result) {
         location(postcode);
       } else {
-        // Delay alert after old data has been cleared
-        function first() {
-          setTimeout(function() {
-            alert("Please, enter a valid postcode, e.g. SW1A 1AA");
-          }, 1);
-        }
-        function second() {
-          let numCrimes = document.querySelector(".numberOfCrimes");
+          alert("Please, enter a valid postcode, e.g. SW1A 1AA");
           numCrimes.textContent = "Number of crimes:";
-        }
-
-        first();
-        second();
       }
     }
   };
@@ -72,6 +63,7 @@ function query() {
     postcode = removeSpaces(postcode);
     let xhr = new XMLHttpRequest();
     let urlLocation = `https://api.postcodes.io/postcodes/${postcode}`;
+    console.log(urlValid);
 
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200) {
@@ -82,13 +74,16 @@ function query() {
         //check date is not in the future or current month
         let today = new Date();
         let currentMonth = today.getMonth() + 1;
+        let currentYear = today.getFullYear();
 
         let month = document.querySelector("#month").value;
-        if(currentMonth <= month) {
-          alert("Please, select a date in the past");
-        } else {
         let year = document.querySelector("#year").value;
-        policeAPI(lat, long, month, year);
+
+        if(month >= currentMonth && year >= currentYear) {
+            alert("Please, select a date in the past");
+            numCrimes.textContent = "Number of crimes:";
+        } else {
+            policeAPI(lat, long, month, year);
         }
       }
     };
