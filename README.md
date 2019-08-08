@@ -1,4 +1,4 @@
-# [Crime watcher](https://fac-17.github.io/CGKO-Week3/) :oncoming_police_car:
+# [Crime watcher](https://gminova.github.io/crime-watcher) :oncoming_police_car:
 
 ## Team   
 [Gigi](github.com/gminova)  
