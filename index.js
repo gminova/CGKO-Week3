@@ -37,7 +37,7 @@ search.addEventListener("click", query);
 let numCrimes = document.querySelector(".numberOfCrimes");
 
 function query() {
-  let e = document.querySelector("ul");
+  let e = document.querySelector("ol");
   e.innerHTML = "";
 
   let postcode = document.querySelector("#searchField").value;
@@ -81,9 +81,11 @@ function query() {
 
         if(month >= currentMonth && year >= currentYear) {
             alert("Please, select a date in the past");
-            numCrimes.textContent = "Number of crimes:";
+            numCrimes.textContent = "Total number of crimes: ";
+            let catCrimes = document.querySelector(".text");
+            catCrimes.textContent = `Categories of crimes `;
         } else {
-            policeAPI(lat, long, month, year);
+            policeAPI(lat, long, month, year, postcode);
         }
       }
     };
@@ -93,7 +95,7 @@ function query() {
 }
 // / Police API
 
-let policeAPI = function(la, lo, month, year) {
+let policeAPI = function(la, lo, month, year, postcode) {
   let xhr = new XMLHttpRequest();
   let URL = `https://data.police.uk/api/crimes-at-location?date=${year}-${month}&lat=${la}&lng=${lo}`;
 
@@ -102,8 +104,12 @@ let policeAPI = function(la, lo, month, year) {
       let policeObj = JSON.parse(xhr.responseText);
 
       let totalCrimes = policeObj.length;
+      let yourResults = document.querySelector(".yourResults");
+      yourResults.textContent = `Your Results for ${month}/${year}`;
       let crimeNum = document.querySelector(".numberOfCrimes");
-      crimeNum.textContent = `Number of crimes: ${totalCrimes}`;
+      crimeNum.textContent = `Total number of crimes: ${totalCrimes}`;
+      let catCrimes = document.querySelector(".text");
+      catCrimes.textContent = `Categories of crimes in ${postcode.toUpperCase()}`;
 
       //POPULATE WITH CATEGORIES WITH COUNT OF CRIMES
       let categories = Object.keys(categoriesIterator(policeObj));
@@ -114,7 +120,7 @@ let policeAPI = function(la, lo, month, year) {
         let parentCrimes = document.querySelector(".categoriesOfCrimes");
         parentCrimes.appendChild(newLine);
 
-        newLine.textContent = `${categories[i]}: ${numbers[i]}`;        
+        newLine.textContent = `${categories[i].charAt(0).toUpperCase() + categories[i].split('-').join(' ').slice(1)}: ${numbers[i]}`;        
       }
     }
   };
