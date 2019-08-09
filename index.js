@@ -76,7 +76,7 @@ function query() {
         location(postcode);
       } else {
           alert("Please, enter a valid postcode, e.g. SW1A 1AA");
-          numCrimes.textContent = "Total number of crimes&#128073; ";
+          numCrimes.textContent = "Total number of crimes is ";
           let catCrimes = document.querySelector(".text");
           catCrimes.textContent = `Categories of crimes `;
       }
@@ -105,7 +105,7 @@ function query() {
 
         if(month >= currentMonth && year >= currentYear) {
             alert("Please, select a date in the past");
-            numCrimes.textContent = "Total number of crimes&#128073; ";
+            numCrimes.textContent = "Total number of crimes is ";
             let catCrimes = document.querySelector(".text");
             catCrimes.textContent = `Categories of crimes `;
         } else {
@@ -131,7 +131,7 @@ let policeAPI = function(la, lo, month, year, postcode) {
       let yourResults = document.querySelector(".yourResults");
       yourResults.textContent = `Your Results for ${month}/${year}`;
       let crimeNum = document.querySelector(".numberOfCrimes");
-      crimeNum.textContent = `Total number of crimes&#128073; ${totalCrimes}`;
+      crimeNum.textContent = `Total number of crimes is ${totalCrimes}`;
       let catCrimes = document.querySelector(".text");
       catCrimes.textContent = `Categories of crimes in ${postcode.toUpperCase()}`;
 
