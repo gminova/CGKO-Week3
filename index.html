@@ -14,22 +14,29 @@
     />
   </head>
   <header>
-    <h1 class="title">How safe is your area?</h1>
+    <h1 class="title">&#128660;How safe is your street?&#128660;</h1>
   </header>
 
   <body>
     <section class="outer-container">
       <section class="input-container">
 
-        <label for="searchField">Write postcode:</label>
-        <input type="text" name="searchfield"
+        <label for="searchField">&#128204;Select postcode:</label>
+        <input type="text" list="myDatalist" name="myDatalist"
           class="search-field"
           id="searchField"
           placeholder="Enter your postcode"
           required
         />
+        <datalist
+        class="search-field"
+        id="myDatalist"
+        name="myDatalist"
+        required
+      >
+      </datalist>
 
-        <label for="month">Select month:</label>
+        <label for="month">&#128467;Select month:</label>
           <select id="month" class="dropdown">
             <option value="01" selected>January</option>
             <option value="02">February</option>
@@ -45,7 +52,7 @@
             <option value="12">December</option>
           </select>
 
-          <label for="year">Select year:</label>
+          <label for="year">&#128269;Select year:</label>
           <select id="year" class="dropdown">
             <option value="2019" selected>2019</option>
             <option value="2018">2018</option>
@@ -58,7 +65,7 @@
     <section class="result-container">
       <article>
         <h1 class="yourResults">Your Results</h1>
-        <p class="numberOfCrimes">Total number of crimes</p>
+        <p class="numberOfCrimes">Total number of crimes: </p>
         <p class="text">Categories of crimes</p>
         <ol class="categoriesOfCrimes"></ol>
       </article>

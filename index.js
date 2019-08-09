@@ -1,7 +1,31 @@
-//Remove spaces from postcode
-function removeSpaces(postcode) {
-  return postcode.replace(/\s/g, "");
+//autocomplete
+let input = document.getElementById("searchField");
+input.addEventListener("input", call);
+
+function call() {
+  let empty = document.getElementById("myDatalist");
+  empty.innerHTML = "";
+  let queryString = encodeURIComponent(input.value);
+
+  let url = `https://postcodes.io/postcodes/${queryString}/autocomplete`;
+  let xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      let response = JSON.parse(xhr.responseText);
+      let datalist = document.getElementById("myDatalist");
+      response.result.forEach(e => {
+        let child = document.createElement("option");
+        child.value = e;
+        datalist.appendChild(child);
+      });
+    }
+  };
+  xhr.open("GET", url, true);
+  xhr.send();
 }
+
+
 
 //Function which filters categories by number of crimes
 
@@ -52,7 +76,9 @@ function query() {
         location(postcode);
       } else {
           alert("Please, enter a valid postcode, e.g. SW1A 1AA");
-          numCrimes.textContent = "Number of crimes:";
+          numCrimes.textContent = "Total number of crimes: ";
+          let catCrimes = document.querySelector(".text");
+          catCrimes.textContent = `Categories of crimes `;
       }
     }
   };
@@ -60,10 +86,8 @@ function query() {
   valid.send();
 
   function location(postcode) {
-    postcode = removeSpaces(postcode);
     let xhr = new XMLHttpRequest();
     let urlLocation = `https://api.postcodes.io/postcodes/${postcode}`;
-    console.log(urlValid);
 
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200) {
