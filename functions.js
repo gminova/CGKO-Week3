@@ -3,34 +3,30 @@ const functions = {
     return "Tape is working! Hooray!";
   },
 
-  categoriesIterator: function(policeObj) {
-    let uniquCats = [];
-    for (let i = 0; i < policeObj.length; i++) {
-      if (!uniquCats.includes(policeObj[i].category)) {
-        uniquCats.push(policeObj[i].category);
-      }
-    }
+  categoriesIterator: function(allCrimes) {
+    let categories = [];
+    allCrimes.map(crime => categories.push(crime.category));
 
-    let numByCat = [];
-    for (let i = 0; i < uniquCats.length; i++) {
+    let numCrimesByCategory = [];
+
+    categories.forEach (category => {
       let count = 0;
-      for (let j = 0; j < policeObj.length; j++) {
-        if (uniquCats[i] === policeObj[j].category) {
-          count++;
+      allCrimes.forEach(crime => {
+        if(category === crime.category) {
+          count ++;
         }
-      }
-      numByCat.push(count);
+      })
+      numCrimesByCategory.push(count);
       count = 0;
-    }
+    });
 
-    let objByCat = {};
-    for (let i = 0; i < uniquCats.length; i++) {
-      objByCat[uniquCats[i]] = numByCat[i];
-    }
-    return objByCat;
+    let crimeCountByCategory = {};
+    categories.map((category, i) => crimeCountByCategory[category] = numCrimesByCategory[i]);
+    return crimeCountByCategory;
   }
 };
 
+//only export if file not undefined
 if (typeof module !== "undefined") {
   module.exports = functions;
 }
