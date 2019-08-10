@@ -29,7 +29,11 @@ function call() {
 
 const categoriesIterator = allCrimes => {
   let categories = [];
-  allCrimes.map(crime => categories.push(crime.category));
+  allCrimes.map(crime => {
+    if (!categories.includes(crime.category)) {
+      categories.push(crime.category);
+    }
+  });
 
   let numCrimesByCategory = [];
 
