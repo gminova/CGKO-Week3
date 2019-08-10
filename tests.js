@@ -6,13 +6,6 @@ test("Testing Tape is working with 1", function(t) {
   t.end();
 });
 
-test("Testing that the output has no empty spaces inside the string", function(t) {
-  const actual = functions.removeSpaces("N1 8EX");
-  const expected = "N18EX";
-  t.equal(actual, expected, "Should return without spaces");
-  t.end();
-});
-
 test("Testing function returns object with unique categories with count", function(t) {
   const actual = functions.categoriesIterator([
     {

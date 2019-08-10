@@ -3,10 +3,6 @@ const functions = {
     return "Tape is working! Hooray!";
   },
 
-  removeSpaces: function (postcode) {
-    return postcode.replace(/\s/g, "");
-  },
-
   categoriesIterator: function(policeObj) {
     let uniquCats = [];
     for (let i = 0; i < policeObj.length; i++) {

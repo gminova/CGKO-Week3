@@ -58,6 +58,14 @@ function categoriesIterator(policeObj) {
 let search = document.querySelector("#searchButton");
 search.addEventListener("click", query);
 
+//Search on Enter
+input.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    search.click();
+  }
+});
+
 let numCrimes = document.querySelector(".numberOfCrimes");
 
 function query() {
