@@ -4,39 +4,55 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Crime watcher</title>
-    <meta name="description" content="App using Postcode & Geolocation API for the UK and Police UK API" />
+    <meta
+      name="description"
+      content="App using Postcode & Geolocation API for the UK and Police UK API"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" type="image/icon" href="favicon.ico"/>
+    <link rel="shortcut icon" type="image/icon" href="favicon.ico" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
     />
+    <!-- include leaflet css and javascript -->
+    <link
+      rel="stylesheet"
+      crossorigin=""
+      href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"
+      crossorigin=""
+    ></script>
   </head>
   <header>
     <h1 class="title">&#128660;How safe is your street?&#128660;</h1>
   </header>
 
   <body>
-    <section class="outer-container">
-      <section class="input-container">
+    <div class="wrapper">
+      <section class="outer-container">
+        <section class="input-container">
+          <label for="searchField">&#128204;Select postcode:</label>
+          <input
+            type="text"
+            list="myDatalist"
+            name="myDatalist"
+            class="search-field"
+            id="searchField"
+            placeholder="Enter your postcode"
+            required
+          />
+          <datalist
+            class="search-field"
+            id="myDatalist"
+            name="myDatalist"
+            required
+          >
+          </datalist>
 
-        <label for="searchField">&#128204;Select postcode:</label>
-        <input type="text" list="myDatalist" name="myDatalist"
-          class="search-field"
-          id="searchField"
-          placeholder="Enter your postcode"
-          required
-        />
-        <datalist
-        class="search-field"
-        id="myDatalist"
-        name="myDatalist"
-        required
-      >
-      </datalist>
-
-        <label for="month">&#128467;Select month:</label>
+          <label for="month">&#128467;Select month:</label>
           <select id="month" class="dropdown">
             <option value="01" selected>January</option>
             <option value="02">February</option>
@@ -59,19 +75,20 @@
             <option value="2017">2017</option>
           </select>
 
-        <button class="search-button" id="searchButton">Search</button>
-      </section>
+          <button class="search-button" id="searchButton">Search</button>
+        </section>
 
-    <section class="result-container">
-      <article>
-        <h1 class="yourResults">Your Results</h1>
-        <p class="numberOfCrimes">Total number of crimes &#128073; </p>
-        <p class="text">Categories of crimes</p>
-        <ol class="categoriesOfCrimes"></ol>
-      </article>
+        <section class="result-container">
+          <article>
+            <h1 class="yourResults">Your Results</h1>
+            <p class="numberOfCrimes">Total number of crimes &#128073;</p>
+            <p class="text">Categories of crimes</p>
+            <ol class="categoriesOfCrimes"></ol>
+          </article>
+        </section>
       </section>
-    </section>
-
+    </div>
+    <div id="map"></div>
     <script src="index.js"></script>
   </body>
 </html>

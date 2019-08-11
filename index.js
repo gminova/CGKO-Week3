@@ -1,3 +1,33 @@
+/*LeafLetJS.com MAP*/
+
+const getMap = (la, lo, postcode) => {
+  let map = L.map("map").setView([`${la}`, `${lo}`], 13);
+  L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  L.marker([`${la}`, `${lo}`])
+    .addTo(map)
+    .bindPopup(`${postcode}`)
+    .openPopup();
+};
+
+//render map
+
+(function() {
+  getMap(51.501009, -0.141588, "E.g. postcode SW1A 1AA");
+})();
+
+// remove Map
+function initializingMap() {
+  // call this method before you initialize your map.
+  let map = L.DomUtil.get("map");
+  if (map != null) {
+    map._leaflet_id = null;
+  }
+}
+
 //autocomplete
 let input = document.getElementById("searchField");
 input.addEventListener("input", call);
@@ -131,7 +161,6 @@ function query() {
 let policeAPI = function(la, lo, month, year, postcode) {
   let xhr = new XMLHttpRequest();
   let URL = `https://data.police.uk/api/crimes-at-location?date=${year}-${month}&lat=${la}&lng=${lo}`;
-
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
       let allCrimes = JSON.parse(xhr.responseText);
@@ -158,6 +187,12 @@ let policeAPI = function(la, lo, month, year, postcode) {
             .join(" ")
             .slice(1)}: ${crime[1]}`;
       });
+
+      //refreshMap
+      initializingMap();
+      //updateMap
+      getMap(la, lo, postcode);
+      //request
     }
   };
   xhr.open("GET", URL, true);
