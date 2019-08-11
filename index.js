@@ -1,7 +1,7 @@
 /*LeafLetJS.com MAP*/
 
-const getMap = (la, lo, postcode) => {
-  let map = L.map("map").setView([`${la}`, `${lo}`], 16);
+const getMap = (la, lo, postcode, view) => {
+  let map = L.map("map").setView([`${la}`, `${lo}`], `${view}`);
   L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     attribution:
       '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -9,14 +9,14 @@ const getMap = (la, lo, postcode) => {
 
   L.marker([`${la}`, `${lo}`])
     .addTo(map)
-    .bindPopup(`${postcode}`)
+    .bindPopup(`${postcode.toUpperCase()}`)
     .openPopup();
 };
 
 //render map
 
 (function() {
-  getMap(51.501009, -0.141588, "E.g. postcode SW1A 1AA");
+  getMap(51.5074, 0.1278, "London", 4);
 })();
 
 // remove Map
@@ -191,7 +191,7 @@ let policeAPI = function(la, lo, month, year, postcode) {
       //refreshMap
       initializingMap();
       //updateMap
-      getMap(la, lo, postcode);
+      getMap(la, lo, postcode, 16);
       //request
     }
   };
