@@ -16,7 +16,7 @@ const getMap = (la, lo, postcode, view) => {
 //render map
 
 (function() {
-  getMap(51.5074, 0.1278, "London", 4);
+  getMap(51.5029976, -0.1493332, "London", 8);
 })();
 
 // remove Map
